@@ -1,7 +1,8 @@
 import 'reflect-metadata';
-import * as express from "express"
-import * as bodyParser from "body-parser"
-import { router } from "./Router/routes"
+import 'dotenv/config';
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { router } from "./Router/routes";
 import { AppDataSource } from './data-source';
 
 AppDataSource.initialize()
