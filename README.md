@@ -1,2 +1,2 @@
-# BankGFT
-Projeto de estudo desenvolvido utilizando node.js
+# ApiBankGFT
+Projeto de estudo desenvolvido em node.js
