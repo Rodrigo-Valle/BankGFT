@@ -1,26 +1,23 @@
 import { Request, Response } from 'express';
-import { CreateUserService } from '../service/CreateUserService';
-import { usuarioSchema } from '../schemas/usuario.schema';
-import * as joi from "joi";
-
-
+import { userCreateSchema } from '../../schemas/UserSchemas/user.create.schema';
+import { CreateUserService } from '../../service/UserService/CreateUserService';
 
 export class CreateUserController {
     async handle(req: Request, res: Response) {
         try {
-            await usuarioSchema.validateAsync(req.body);
+            await userCreateSchema.validateAsync(req.body);
 
             const createUserService = new CreateUserService();
 
-            const usuario = await createUserService.execute({
+            const result = await createUserService.execute({
                 nome: req.body.nome,
                 email: req.body.email,
                 senha: req.body.senha
             });
 
-            usuario.senha = req.body.senha;
+            result.senha = req.body.senha;
 
-            res.status(201).send(usuario);
+            res.status(201).send(result);
         } catch (error) {
             res.status(400).send(error.message);
         }
