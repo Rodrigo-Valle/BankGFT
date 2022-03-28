@@ -26,7 +26,6 @@ export class Account {
     @ManyToOne(() => User, (user) => user.id)
     correntista: User
 
-
     getAccount = function () {
         const account = this
 

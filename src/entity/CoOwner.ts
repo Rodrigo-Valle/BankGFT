@@ -14,7 +14,7 @@ export class CoOwner {
     email: string
 
     @Column('date')
-    data_nasc: string
+    data_nasc: Date
 
     @Column()
     celular: string
@@ -24,4 +24,13 @@ export class CoOwner {
 
     @ManyToOne(() => User, (user) => user.id)
     usuario: User
+
+    getCoOwner = function () {
+        const coOwner = this
+
+        delete coOwner.usuario.senha;
+        delete coOwner.usuario.codigo_reset;
+
+        return coOwner;
+    }
 }

@@ -28,7 +28,7 @@ export class User {
     @OneToMany(() => Account, (account) => account.correntista)
     contas: Account[]
 
-    @OneToMany(() => CoOwner, (coOwner) => coOwner.id)
+    @OneToMany(() => CoOwner, (coOwner) => coOwner.usuario)
     coTitulares: CoOwner[]
 
     generateAuthToken = async function () {

@@ -10,6 +10,9 @@ import { GetAccountController } from '../controller/AccountController/GetAccount
 import { GetOneAccountController } from '../controller/AccountController/GetOneAccountController';
 import { UpdateAccountController } from '../controller/AccountController/UpdateAccountController';
 import { DeleteAccountController } from '../controller/AccountController/DeleteAccountController';
+import { CreateCoOwnerController } from '../controller/CoOwnerController/CreateCoOwnerController';
+import { GetCoOwnerController } from '../controller/CoOwnerController/GetCoOwnerController';
+import { GetOneCoOwnerController } from '../controller/CoOwnerController/GetOneCoOwnerController';
 
 const router = Router();
 
@@ -24,5 +27,9 @@ router.get('/dados-conta', auth, new GetAccountController().handle)
 router.get('/dados-conta/:id', auth, new GetOneAccountController().handle)
 router.patch('/conta/:id', auth, new UpdateAccountController().handle)
 router.delete('/conta/:id', auth, new DeleteAccountController().handle)
+
+router.post('/co-titular', auth, new CreateCoOwnerController().handle)
+router.get('/co-titular', auth, new GetCoOwnerController().handle)
+router.get('/co-titular/:id', auth, new GetOneCoOwnerController().handle)
 
 export { router }
