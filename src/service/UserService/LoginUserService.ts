@@ -1,7 +1,6 @@
-import { AppDataSource } from "../data-source";
-import { Usuario } from "../entity/Usuario";
 import * as bcrypt from 'bcryptjs';
-
+import { AppDataSource } from '../../data-source';
+import { User } from '../../entity/User';
 
 interface IUsuario {
     email: string,
@@ -11,20 +10,20 @@ interface IUsuario {
 export class LoginUserService {
     async execute({ email, senha }: IUsuario) {
 
-        const usuarioRepository = AppDataSource.getRepository(Usuario);
+        const userRepository = AppDataSource.getRepository(User);
 
-        const usuario = await usuarioRepository.findOneBy({ email: email });
+        const user = await userRepository.findOneBy({ email: email });
 
-        if (!usuario) {
+        if (!user) {
             throw new Error('email ou senha incorretos, tente novamente');
         }
 
-        const isMatch = await bcrypt.compare(senha, usuario.senha);
+        const isMatch = await bcrypt.compare(senha, user.senha);
 
         if (!isMatch) {
             throw new Error("email ou senha incorretos, tente novamente");
         }
 
-        return usuario.getUsuario();
+        return user.getUser();
     }
 }

@@ -1,14 +1,11 @@
-import { ChangePasswordUserService } from "../service/ChangePasswordUserService";
+import { ChangePasswordUserService } from "../../service/UserService/ChangePasswordUserService";
 import { Request, Response } from 'express';
-import { usuarioChangePasswordSchema } from "../schemas/usuario.changePassword.schema";
-
-
+import { userChangePasswordSchema } from "../../schemas/UserSchemas/user.changePassword.schema";
 
 export class ChangePasswordUserController {
     async handle(req: Request, res: Response) {
-
         try {
-            await usuarioChangePasswordSchema.validateAsync(req.body);
+            await userChangePasswordSchema.validateAsync(req.body);
 
             const changePasswordUserService = new ChangePasswordUserService();
 
@@ -22,6 +19,5 @@ export class ChangePasswordUserController {
         } catch (error) {
             res.status(400).send(error.message);
         }
-
     }
 }

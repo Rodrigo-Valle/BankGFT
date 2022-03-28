@@ -3,5 +3,5 @@ export const smtp = {
     port: 587,
     secure: false,
     user: process.env.EMAIL,
-    pass: process.env.SENHA_EMAIL
+    pass: process.env.PASSWORD_EMAIL
 }

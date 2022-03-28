@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import * as express from "express";
+import express from "express";
 import * as bodyParser from "body-parser";
 import { router } from "./Router/routes";
 import { AppDataSource } from './data-source';
@@ -16,5 +16,3 @@ AppDataSource.initialize()
         })
     })
     .catch((e) => console.log(e));
-
-

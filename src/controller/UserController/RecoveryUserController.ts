@@ -1,13 +1,11 @@
-import { RecoveryUserService } from "../service/RecoveryUserService";
 import { Request, Response } from 'express';
-import { usuarioRecoverySchema } from "../schemas/usuario.recovery.schema";
-
+import { userRecoverySchema } from '../../schemas/UserSchemas/user.recovery.schema';
+import { RecoveryUserService } from '../../service/UserService/RecoveryUserService';
 
 export class RecoveryUserController {
     async handle(req: Request, res: Response) {
-
         try {
-            await usuarioRecoverySchema.validateAsync(req.body);
+            await userRecoverySchema.validateAsync(req.body);
 
             const recoveryUserService = new RecoveryUserService();
 

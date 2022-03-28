@@ -1,8 +1,6 @@
 import * as nodemailer from 'nodemailer';
 import { smtp } from '../config/smtp';
 
-
-
 export async function execute(codigo: string, email: string) {
     const transporter = nodemailer.createTransport({
         host: smtp.host,
