@@ -5,4 +5,5 @@ export const userRecoverySchema = joi.object({
         'string.email': 'Entre com e-mail válido',
         'any.required': 'Campo email é obrigatório'
     }),
+    
 });

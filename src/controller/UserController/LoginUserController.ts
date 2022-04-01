@@ -16,7 +16,7 @@ export class LoginUserController {
 
             const token = await result.generateAuthToken();
 
-            res.status(201).send({ result, token });
+            res.status(200).send({ result, token });
         } catch (error) {
             res.status(400).send(error.message);
         }

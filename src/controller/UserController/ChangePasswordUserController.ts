@@ -15,7 +15,7 @@ export class ChangePasswordUserController {
                 codigo: req.body.codigo
             });
 
-            res.status(200).send("senha alterada com sucesso");
+            res.status(200).send("Senha alterada com sucesso");
         } catch (error) {
             res.status(400).send(error.message);
         }

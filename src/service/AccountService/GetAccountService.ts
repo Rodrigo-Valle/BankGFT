@@ -5,7 +5,7 @@ export class GetAccountService {
     async execute(id: number) {
         const userRepository = AppDataSource.getRepository(User);
 
-        const user = await userRepository.findOne({
+        const user = await userRepository.findOneOrFail({
             relations: {
                 contas: true
             },
@@ -19,9 +19,7 @@ export class GetAccountService {
             }
         });
 
-        if (user.contas.length === 0) {
-            throw new Error("Usuario não possui contas");
-        }
+
         return user;
     }
 }

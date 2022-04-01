@@ -1,18 +1,15 @@
 import 'reflect-metadata';
 import 'dotenv/config';
-import express from "express";
-import * as bodyParser from "body-parser";
-import { router } from "./Router/routes";
 import { AppDataSource } from './data-source';
+import { app } from './app';
 
-AppDataSource.initialize()
-    .then(() => {
-        const app = express();
-        app.use(bodyParser.json());
-        app.use(router);
+AppDataSource.initialize().then(() => {
+    console.log("DataSource initialized");
+}).catch((e) => {
+    console.log(e);
+})
 
-        app.listen(3000, () => {
-            console.log("Express server has started on port 3000. Open http://localhost:3000/ to see results")
-        })
-    })
-    .catch((e) => console.log(e));
+const port = process.env.APP_PORT;
+app.listen(port, () => {
+    console.log(`Express server has started on port ${port} . Open http://localhost:${port}/ to see results`)
+})

@@ -6,7 +6,9 @@ export class GetAccountController {
         try {
             const getAccountService = new GetAccountService();
 
-            const result = await getAccountService.execute(req.id);
+            const usuario = req.id
+
+            const result = await getAccountService.execute(usuario);
 
             res.status(200).send(result);
         } catch (error) {

@@ -13,7 +13,7 @@ export class ChangePasswordUserService {
         }
 
         if (user.codigo_reset !== codigo) {
-            throw new Error("código de recuperação inválido");
+            throw new Error("Código de recuperação inválido");
         }
 
         user.senha = await bcrypt.hash(senha, 8);

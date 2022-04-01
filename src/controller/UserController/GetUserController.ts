@@ -9,7 +9,7 @@ export class GetUserController {
 
             const result = await getUserService.execute(req.id);
 
-            res.status(200).send(result);
+            res.status(200).send({result});
         } catch (error) {
             res.status(400).send(error.message);
         }

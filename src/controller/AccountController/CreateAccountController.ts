@@ -10,13 +10,17 @@ export class CreateAccountController {
 
             const createAccountService = new CreateAccountService();
 
+            const usuario = req.id;
+
             const result = await createAccountService.execute({
                 saldo: req.body.saldo,
                 cartaoCredito: req.body.cartaoCredito,
-                usuario: req.id
+                usuario
             });
 
-            res.status(201).send(result);
+            console.log(result)
+
+            res.status(201).send({result});
         } catch (error) {
             res.status(400).send(error.message);
         }
