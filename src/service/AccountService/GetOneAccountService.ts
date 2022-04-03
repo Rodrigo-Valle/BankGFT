@@ -5,7 +5,7 @@ export class GetOneAccountService {
     async execute(id: number, accountId: number) {
         const userRepository = AppDataSource.getRepository(User);
 
-        const user = await userRepository.findOneOrFail({
+        const user = await userRepository.findOne({
             relations: {
                 contas: true
             },

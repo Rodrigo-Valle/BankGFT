@@ -18,8 +18,6 @@ export class CreateAccountController {
                 usuario
             });
 
-            console.log(result)
-
             res.status(201).send({result});
         } catch (error) {
             res.status(400).send(error.message);
