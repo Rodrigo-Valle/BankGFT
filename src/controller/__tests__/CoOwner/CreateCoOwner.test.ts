@@ -62,7 +62,7 @@ describe("CreateCoOwnerController validações nome", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe("Campo nome é obrigatório");
+        expect(response.body.error).toBe("Campo nome é obrigatório");
     });
 
     it('Deve retornar 400 ao criar novo co-participante com nome com  menos de 3 caracteres', async () => {
@@ -75,7 +75,7 @@ describe("CreateCoOwnerController validações nome", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe("Nome deve possuir ao menos 3 caracteres");
+        expect(response.body.error).toBe("Nome deve possuir ao menos 3 caracteres");
     });
 
     it('Deve retornar 400 ao criar novo co-participante com nome com mais de 30 caracteres', async () => {
@@ -88,7 +88,7 @@ describe("CreateCoOwnerController validações nome", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe("Nome deve possuir no maximo 30 caracteres");
+        expect(response.body.error).toBe("Nome deve possuir no maximo 30 caracteres");
     });
 });
 
@@ -102,7 +102,7 @@ describe("CreateCoOwnerController validações email", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo email é obrigatório');
+        expect(response.body.error).toBe('Campo email é obrigatório');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com valor inválido para o campo email', async () => {
@@ -115,7 +115,7 @@ describe("CreateCoOwnerController validações email", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Entre com e-mail válido');
+        expect(response.body.error).toBe('Entre com e-mail válido');
     });
 });
 
@@ -129,7 +129,7 @@ describe("CreateCoOwnerController validações data de nacimento", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo data de nascimento é obrigatório');
+        expect(response.body.error).toBe('Campo data de nascimento é obrigatório');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com valor inválido para o campo data de nascimento', async () => {
@@ -142,7 +142,7 @@ describe("CreateCoOwnerController validações data de nacimento", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('O valor não corresponde a uma data valida');
+        expect(response.body.error).toBe('O valor não corresponde a uma data valida');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com data de nascimento superior a data de hoje', async () => {
@@ -158,7 +158,7 @@ describe("CreateCoOwnerController validações data de nacimento", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A data não pode ser posterior a data de hoje');
+        expect(response.body.error).toBe('A data não pode ser posterior a data de hoje');
     });
 });
 
@@ -172,7 +172,7 @@ describe("CreateCoOwnerController validações campo celular", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo celular obrigatório');
+        expect(response.body.error).toBe('Campo celular obrigatório');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com valor superior a 9 numeros para o campo celular', async () => {
@@ -185,7 +185,7 @@ describe("CreateCoOwnerController validações campo celular", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Celular é composto por 9 numeros');
+        expect(response.body.error).toBe('Celular é composto por 9 numeros');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com valor inferior a 9 numeros para o campo celular', async () => {
@@ -198,7 +198,7 @@ describe("CreateCoOwnerController validações campo celular", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Celular é composto por 9 numeros');
+        expect(response.body.error).toBe('Celular é composto por 9 numeros');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com valor inválido para o campo celular', async () => {
@@ -211,7 +211,7 @@ describe("CreateCoOwnerController validações campo celular", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Celular é composto por 9 numeros');
+        expect(response.body.error).toBe('Celular é composto por 9 numeros');
     });
 });
 
@@ -225,6 +225,6 @@ describe("CreateCoOwnerController validações campo descricao", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo descrição obrigatório');
+        expect(response.body.error).toBe('Campo descrição obrigatório');
     });
 });

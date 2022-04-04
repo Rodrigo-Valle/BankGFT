@@ -1,9 +1,9 @@
 import { ChangePasswordUserService } from "../../service/UserService/ChangePasswordUserService";
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { userChangePasswordSchema } from "../../schemas/UserSchemas/user.changePassword.schema";
 
 export class ChangePasswordUserController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             await userChangePasswordSchema.validateAsync(req.body);
 
@@ -15,9 +15,12 @@ export class ChangePasswordUserController {
                 codigo: req.body.codigo
             });
 
-            res.status(200).send("Senha alterada com sucesso");
+            res.result = "Senha alterada com sucesso"
+            res.stat = 200
+            next()
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400)
+            next(error)
         }
     }
 }

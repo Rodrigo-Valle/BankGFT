@@ -52,7 +52,7 @@ describe('GetAccountController Tests', () => {
         const response = await request(app).get(`/dados-conta`).set('Authorization', `Bearer ${token}`).send();
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Usuario não possui contas');
+        expect(response.body.error).toBe('Usuario não possui contas');
     });
 
     it('Deve retornar 400 se usuario informar id de conta inválido, de outro usuario ou inexistente', async () => {
@@ -61,20 +61,20 @@ describe('GetAccountController Tests', () => {
         const response = await request(app).get(`/dados-conta/${account.id + 100}`).set('Authorization', `Bearer ${token}`).send();
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Conta não localizada');
+        expect(response.body.error).toBe('Conta não localizada');
     });
 
     it('Deve retornar 400 se usuario não estiver logado', async () => {
         const response = await request(app).get(`/dados-conta`).set('Authorization', ``).send();
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe('Por favor, autentique-se');
+        expect(response.body.error).toBe('Por favor, autentique-se');
     });
 
     it('Deve retornar 400 se usuario tentar consultar uma conta e não estiver logado', async () => {
         const response = await request(app).get(`/dados-conta/5`).set('Authorization', ``).send();
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe('Por favor, autentique-se');
+        expect(response.body.error).toBe('Por favor, autentique-se');
     });
 });

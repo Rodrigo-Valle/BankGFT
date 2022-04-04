@@ -37,13 +37,13 @@ describe('DeleteAccountController', () => {
         const response = await request(app).delete(`/conta/${account.id + 1000}`).set('Authorization', `Bearer ${token}`).send();
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Conta não localizada');
+        expect(response.body.error).toBe('Conta não localizada');
     });
 
     it('Deve retornar 400 ao tentar deletar uma conta de usuario não autenticado', async () => {
         const response = await request(app).delete(`/conta/${account.id + 1000}`).set('Authorization', ``).send();
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe('Por favor, autentique-se');
+        expect(response.body.error).toBe('Por favor, autentique-se');
     });
 });    

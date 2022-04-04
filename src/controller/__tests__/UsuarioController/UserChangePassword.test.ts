@@ -30,7 +30,7 @@ describe('UserChangePasswordController Tests', () => {
         });
 
         expect(response.status).toBe(200);
-        expect(response.text).toBe('Senha alterada com sucesso');
+        expect(response.body.data).toBe('Senha alterada com sucesso');
     });
 
     it('Deve retornar 400 ao solicitar troca da senha com campo código inválido', async () => {
@@ -41,7 +41,7 @@ describe('UserChangePasswordController Tests', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Código de recuperação inválido');
+        expect(response.body.error).toBe('Código de recuperação inválido');
     });
 
     it('Deve retornar 400 ao solicitar troca da senha sem informar campo email', async () => {
@@ -52,7 +52,7 @@ describe('UserChangePasswordController Tests', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Usuario não localizado');
+        expect(response.body.error).toBe('Usuario não localizado');
     });
 
     it('Deve retornar 400 ao solicitar troca da senha sem campo código', async () => {
@@ -62,7 +62,7 @@ describe('UserChangePasswordController Tests', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo código é obrigatório');
+        expect(response.body.error).toBe('Campo código é obrigatório');
     });
 });
 
@@ -74,7 +74,7 @@ describe('UserChangePasswordController validações campo email', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo email é obrigatório');
+        expect(response.body.error).toBe('Campo email é obrigatório');
     });
 
     it('Deve retornar 400 ao solicitar troca da senha com valor inválido para o campo email', async () => {
@@ -85,7 +85,7 @@ describe('UserChangePasswordController validações campo email', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Entre com e-mail válido');
+        expect(response.body.error).toBe('Entre com e-mail válido');
     });
 });
 
@@ -97,7 +97,7 @@ describe('UserChangePasswordController validações campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo senha é obrigatório');
+        expect(response.body.error).toBe('Campo senha é obrigatório');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua apenas letras', async () => {
@@ -108,7 +108,7 @@ describe('UserChangePasswordController validações campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua apenas numeros', async () => {
@@ -119,7 +119,7 @@ describe('UserChangePasswordController validações campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua mais de 8 caracteres', async () => {
@@ -130,7 +130,7 @@ describe('UserChangePasswordController validações campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua menos de 8 caracteres', async () => {
@@ -141,6 +141,6 @@ describe('UserChangePasswordController validações campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 });

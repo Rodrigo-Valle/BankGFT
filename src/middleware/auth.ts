@@ -8,6 +8,8 @@ export const auth = async (req: Request, res: Response, next: Next) => {
         req.id = decoded.id;
         next();
     } catch (error) {
-        res.status(401).send("Por favor, autentique-se")
+        res.status(401)
+        error.message = "Por favor, autentique-se";
+        next(error)
     }
 }

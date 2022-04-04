@@ -1,16 +1,19 @@
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { GetCoOwnerService } from '../../service/CoOwnerService/GetCoOwnerService';
 
 export class GetCoOwnerController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             const getCoOwnerService = new GetCoOwnerService();
 
             const result = await getCoOwnerService.execute(req.id);
 
-            res.status(200).send({result});
+            res.result = result
+            res.stat = 200
+            next()
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400)
+            next(error)
         }
     }
 }

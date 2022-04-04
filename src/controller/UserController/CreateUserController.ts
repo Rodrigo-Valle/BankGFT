@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { userCreateSchema } from '../../schemas/UserSchemas/user.create.schema';
 import { CreateUserService } from '../../service/UserService/CreateUserService';
 
 export class CreateUserController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             await userCreateSchema.validateAsync(req.body);
 
@@ -17,9 +17,12 @@ export class CreateUserController {
 
             result.senha = req.body.senha;
 
-            res.status(201).send({result});
+            res.result = result
+            res.stat = 201
+            next()
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400)
+            next(error)
         }
     }
 }

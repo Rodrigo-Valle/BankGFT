@@ -25,7 +25,7 @@ describe('UserCreateController Tests', () => {
         });
 
         expect(response.status).toBe(201);
-        expect(response.body).toHaveProperty('result.id');
+        expect(response.body).toHaveProperty('data.id');
     });
 });
 
@@ -37,7 +37,7 @@ describe('UserCreateController validacão campo nome', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo nome é obrigatório');
+        expect(response.body.error).toBe('Campo nome é obrigatório');
     });
 
     it('Deve retornar 400 se nome for menor a 3 caracteres', async () => {
@@ -48,7 +48,7 @@ describe('UserCreateController validacão campo nome', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Nome deve possuir ao menos 3 caracteres');
+        expect(response.body.error).toBe('Nome deve possuir ao menos 3 caracteres');
     });
 
     it('Deve retornar 400 se nome for maior que 30 caracteres', async () => {
@@ -59,7 +59,7 @@ describe('UserCreateController validacão campo nome', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Nome deve possuir no maximo 30 caracteres');
+        expect(response.body.error).toBe('Nome deve possuir no maximo 30 caracteres');
     });
 });
 
@@ -71,7 +71,7 @@ describe('UserCreateController validação campo email', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo email é obrigatório');
+        expect(response.body.error).toBe('Campo email é obrigatório');
     });
 
     it('Deve retornar 400 se não for informado campo email válido', async () => {
@@ -82,7 +82,7 @@ describe('UserCreateController validação campo email', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Informe um e-mail válido');
+        expect(response.body.error).toBe('Informe um e-mail válido');
     });
 });
 
@@ -94,7 +94,7 @@ describe('UserCreateController validação campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo senha é obrigatório');
+        expect(response.body.error).toBe('Campo senha é obrigatório');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua só letras', async () => {
@@ -105,7 +105,7 @@ describe('UserCreateController validação campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua só numeros', async () => {
@@ -116,7 +116,7 @@ describe('UserCreateController validação campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua mais de 8 caracteres', async () => {
@@ -127,7 +127,7 @@ describe('UserCreateController validação campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 
     it('Deve retornar 400 se for informado uma senha que possua menos de 8 caracteres', async () => {
@@ -138,6 +138,6 @@ describe('UserCreateController validação campo senha', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
     });
 });

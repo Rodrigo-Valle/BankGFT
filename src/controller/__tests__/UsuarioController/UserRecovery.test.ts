@@ -26,7 +26,7 @@ describe("RecoveryUserController Tests", () => {
         });
 
         expect(response.status).toBe(200);
-        expect(response.text).toBe('Solicitação enviada');
+        expect(response.body.data).toBe('Solicitação enviada');
     });
 
     it('Deve retornar 400 ao solicitar recuperação com email não cadastrado', async () => {
@@ -35,7 +35,7 @@ describe("RecoveryUserController Tests", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Usuario não encontrado');
+        expect(response.body.error).toBe('Usuario não encontrado');
     });
 });
 
@@ -46,7 +46,7 @@ describe("RecoveryUserController validações campo email", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Entre com e-mail válido');
+        expect(response.body.error).toBe('Entre com e-mail válido');
     });
 
     it('Deve retornar 400 ao solicitar sem informar campo email', async () => {
@@ -54,6 +54,6 @@ describe("RecoveryUserController validações campo email", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo email é obrigatório');
+        expect(response.body.error).toBe('Campo email é obrigatório');
     });
 });

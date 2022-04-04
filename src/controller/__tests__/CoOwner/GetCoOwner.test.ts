@@ -45,7 +45,7 @@ describe('GetCoOwnerController Tests', () => {
         const response = await request(app).get(`/co-titular/${coOwner.id}`).set('Authorization', `Bearer ${token}`).send();
 
         expect(response.status).toBe(200);
-        expect(response.body.result.coTitulares[0].id).toBe(coOwner.id);
+        expect(response.body.data.coTitulares[0].id).toBe(coOwner.id);
     });
 
     it('Deve retornar 400 ao receber solicitação de usuario não autenticado', async () => {
@@ -53,6 +53,6 @@ describe('GetCoOwnerController Tests', () => {
         const response = await request(app).get(`/co-titular`).set('Authorization', ``).send();
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe("Por favor, autentique-se");
+        expect(response.body.error).toBe("Por favor, autentique-se");
     });
 });

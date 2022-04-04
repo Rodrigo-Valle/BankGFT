@@ -36,7 +36,7 @@ describe('UpdateAccountController Tests', () => {
         });
 
         expect(response.status).toBe(200);
-        expect(response.body.result.cartao_credito).toBe("5362319675394659");
+        expect(response.body.data.cartao_credito).toBe("5362319675394659");
     });
 
     it('Deve retornar 200 e atualizar apenas o campo saldo de uma conta de um usuario autenticado', async () => {
@@ -45,7 +45,7 @@ describe('UpdateAccountController Tests', () => {
         });
 
         expect(response.status).toBe(200);
-        expect(response.body.result.saldo).toBe(1000);
+        expect(response.body.data.saldo).toBe(1000);
     });
 
     it('Deve retornar 200 e atualizar apenas o campo cartão de uma conta de um usuario autenticado', async () => {
@@ -54,7 +54,7 @@ describe('UpdateAccountController Tests', () => {
         });
 
         expect(response.status).toBe(200);
-        expect(response.body.result.cartao_credito).toBe("4532605930348920");
+        expect(response.body.data.cartao_credito).toBe("4532605930348920");
     });
 
     it('Deve retornar 200 e atualizar apenas o campo status de uma conta de um usuario autenticado', async () => {
@@ -63,7 +63,7 @@ describe('UpdateAccountController Tests', () => {
         });
 
         expect(response.status).toBe(200);
-        expect(response.body.result.status).toBe(StatusAccount.INADIMPLENTE);
+        expect(response.body.data.status).toBe(StatusAccount.INADIMPLENTE);
     });
 
     it('Deve retornar 401 ao atualizar uma conta de um usuario não autenticado', async () => {
@@ -74,7 +74,7 @@ describe('UpdateAccountController Tests', () => {
         });
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe('Por favor, autentique-se');
+        expect(response.body.error).toBe('Por favor, autentique-se');
     });
 });
 
@@ -87,7 +87,7 @@ describe('UpdateAccountController validações', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Obrigatório valor numérico');
+        expect(response.body.error).toBe('Obrigatório valor numérico');
     });
 
     it('Deve retornar 400 ao passar valor inválido para o campo cartão de credito', async () => {
@@ -96,7 +96,7 @@ describe('UpdateAccountController validações', () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Cartão invalido');
+        expect(response.body.error).toBe('Cartão invalido');
     });
     it('Deve retornar 400 ao passar valor inválido para o campo status', async () => {
         const response = await request(app).patch(`/conta/${account.id}`).set('Authorization', `Bearer ${token}`).send({

@@ -34,7 +34,7 @@ describe("CreateAccountController Tests", () => {
         });
 
         expect(response.status).toBe(201);
-        expect(response.body).toHaveProperty('result.cartao_credito');
+        expect(response.body).toHaveProperty('data.cartao_credito');
     });
 
     it('Deve retornar 201 ao criar nova conta sem informar saldo', async () => {
@@ -43,7 +43,7 @@ describe("CreateAccountController Tests", () => {
         });
 
         expect(response.status).toBe(201);
-        expect(response.body).toHaveProperty('result.cartao_credito');
+        expect(response.body).toHaveProperty('data.cartao_credito');
     });
 
     it('Deve retornar 400 ao tentar criar conta sem usuario estar autenticado', async () => {
@@ -51,7 +51,7 @@ describe("CreateAccountController Tests", () => {
         });
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe('Por favor, autentique-se');
+        expect(response.body.error).toBe('Por favor, autentique-se');
     });
 });
 describe("CreateAccountController validações campo cartão", () => {
@@ -60,7 +60,7 @@ describe("CreateAccountController validações campo cartão", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo cartão é obrigatório');
+        expect(response.body.error).toBe('Campo cartão é obrigatório');
     });
 
     it('Deve retornar 400 ao passar valor inválido no campo cartão', async () => {
@@ -69,7 +69,7 @@ describe("CreateAccountController validações campo cartão", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Campo cartão é composto por uma sequencia de 16 numeros sem espaços ou separadores');
+        expect(response.body.error).toBe('Campo cartão é composto por uma sequencia de 16 numeros sem espaços ou separadores');
     });
 });
 
@@ -81,7 +81,7 @@ describe("CreateAccountController validações saldo", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('informar valor de saldo positivo');
+        expect(response.body.error).toBe('informar valor de saldo positivo');
     });
 
     it('Deve retornar 400 ao passar valor inválido para o campo saldo', async () => {
@@ -91,7 +91,7 @@ describe("CreateAccountController validações saldo", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.text).toBe('Obrigatório valor numérico');
+        expect(response.body.error).toBe('Obrigatório valor numérico');
     });
 });
 

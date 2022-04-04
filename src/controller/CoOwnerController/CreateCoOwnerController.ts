@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { coOwnerCreateSchema } from '../../schemas/CoOwnerSchemas/coowner.create.schema';
 import { CreateCoOwnerService } from '../../service/CoOwnerService/CreateCoOwnerService';
 
 
 export class CreateCoOwnerController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             await coOwnerCreateSchema.validateAsync(req.body);
 
@@ -19,9 +19,12 @@ export class CreateCoOwnerController {
                 descricao: req.body.descricao
             });
 
-            res.status(201).send(result);
+            res.result = result
+            res.stat = 201
+            next()
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400)
+            next(error)
         }
     }
 }

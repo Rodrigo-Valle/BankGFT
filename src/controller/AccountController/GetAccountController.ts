@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { GetAccountService } from '../../service/AccountService/GetAccountservice';
 
 export class GetAccountController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             const getAccountService = new GetAccountService();
 
@@ -10,9 +10,12 @@ export class GetAccountController {
 
             const result = await getAccountService.execute(usuario);
 
-            res.status(200).send(result);
+            res.result = result
+            res.stat = 200
+            next()
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400)
+            next(error)
         }
     }
 }

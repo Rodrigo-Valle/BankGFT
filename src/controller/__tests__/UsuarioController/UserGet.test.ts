@@ -27,13 +27,13 @@ describe("UserGetController", () => {
         const response = await request(app).get('/usuario/me').set('Authorization', `Bearer ${token}`).send();
 
         expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('result.id');
+        expect(response.body).toHaveProperty('data.id');
     });
 
     it('Deve retornar 400 ao buscar usuario não autenticado', async () => {
         const response = await request(app).get('/usuario/me').set('Authorization', '').send();
 
         expect(response.status).toBe(401);
-        expect(response.text).toBe('Por favor, autentique-se');
+        expect(response.body.error).toBe('Por favor, autentique-se');
     });
 });

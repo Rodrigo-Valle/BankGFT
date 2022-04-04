@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response, Next, Error } from 'express';
 import { auth } from '../middleware/auth';
 import { ChangePasswordUserController } from '../controller/UserController/ChangePasswordUserController';
 import { CreateUserController } from "../controller/UserController/CreateUserController";
@@ -32,4 +32,30 @@ router.post('/co-titular', auth, new CreateCoOwnerController().handle)
 router.get('/co-titular', auth, new GetCoOwnerController().handle)
 router.get('/co-titular/:id', auth, new GetOneCoOwnerController().handle)
 
+
+
+router.use((req: Request, res: Response, next: Next) => {
+    if(res.stat < 400) {
+        res.status(res.stat).json({
+            hasError: false,
+            error: null,
+            data: res.result
+        })
+    }
+    next()
+})
+
+router.use((error: Error, req: Request, res: Response, next: Next) => {
+    res.json({
+        hasError: true,
+        error: error.message,
+        data: null
+    })
+})
+
+router.use((req, res, next) => {
+    res.status(404).json('Not found')
+})
+
 export { router }
+
