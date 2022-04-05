@@ -2,9 +2,9 @@ import * as joi from "joi";
 
 export const coOwnerCreateSchema = joi.object({
     id: joi.any().forbidden(),
-    nome: joi.string().min(3).max(150).required().messages({
+    nome: joi.string().min(3).max(30).required().messages({
         'string.min': 'Nome deve possuir ao menos 3 caracteres',
-        'string.max': 'Nome deve possuir no maximo 150 caracteres',
+        'string.max': 'Nome deve possuir no maximo 30 caracteres',
         'any.required': 'Campo nome é obrigatório'
     }),
     email: joi.string().email().required().messages({

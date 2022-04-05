@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Account } from "../../entity/Account";
+import { StatusAccount } from "../../entity/enum/StatusAccountEnum";
 import { User } from "../../entity/User";
 
 interface IAccount {
@@ -20,11 +21,10 @@ export class CreateAccountService {
         }
 
         const account = new Account();
-        account.saldo = saldo;
         account.cartao_credito = cartaoCredito;
         account.correntista = user;
 
-        accountRepository.save(account);
+        await accountRepository.save(account);
 
         return account.getAccount();
     }

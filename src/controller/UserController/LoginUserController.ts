@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { userLoginSchema } from '../../schemas/UserSchemas/user.login.schema';
 import { LoginUserService } from '../../service/UserService/LoginUserService';
 
 export class LoginUserController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             await userLoginSchema.validateAsync(req.body);
 
@@ -16,9 +16,12 @@ export class LoginUserController {
 
             const token = await result.generateAuthToken();
 
-            res.status(201).send({ result, token });
+            res.result = { result, token };
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400);
+            next(error);
         }
     }
 }

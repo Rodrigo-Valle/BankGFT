@@ -19,9 +19,10 @@ export class GetAccountService {
             }
         });
 
-        if (user.contas.length === 0) {
-            throw new Error("Usuario não possui contas");
+        if(user.contas.length === 0) {
+            throw new Error("Usuario não possui contas")
         }
+
         return user;
     }
 }

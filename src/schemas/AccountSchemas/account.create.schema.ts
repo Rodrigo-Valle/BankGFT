@@ -3,7 +3,7 @@ import * as joi from "joi";
 export const accountCreateSchema = joi.object({
     id: joi.any().forbidden(),
     saldo: joi.number().positive().messages({
-        'number.base': "obrigatório valor numérico",
+        'number.base': "Obrigatório valor numérico",
         'number.positive': "informar valor de saldo positivo"
     }),
     cartaoCredito: joi.string().creditCard().required().messages({

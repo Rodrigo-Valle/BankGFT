@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, Response, Next } from 'express';
 import { accountUpdateSchema } from '../../schemas/AccountSchemas/account.update.schema';
 import { UpdateAccountService } from '../../service/AccountService/UpdateAccountService';
 
 export class UpdateAccountController {
-    async handle(req: Request, res: Response) {
+    async handle(req: Request, res: Response, next: Next) {
         try {
             await accountUpdateSchema.validateAsync(req.body);
 
@@ -16,9 +16,12 @@ export class UpdateAccountController {
                 id: req.params.id
             });
 
-            res.status(201).send(result);
+            res.result = result;
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400);
+            next(error);
         }
     }
 }
