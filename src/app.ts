@@ -8,7 +8,6 @@ import { router } from "./Router/routes";
 const app = express();
 app.use(bodyParser.json());
 
-
 app.use(morgan('dev', {
     skip: function (req: Request, res: Response) { return res.statusCode < 400 },
     stream: fs.createWriteStream(path.join('src/logs', 'error.log'), { flags: 'a' })
@@ -19,9 +18,6 @@ app.use(morgan('combined', {
     stream: fs.createWriteStream(path.join('src/logs', 'success.log'), { flags: 'a' })
 }));
 
-
 app.use(router);
-
-
 
 export { app }

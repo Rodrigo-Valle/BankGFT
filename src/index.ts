@@ -5,7 +5,6 @@ import { app } from './app';
 
 const port = process.env.APP_PORT;
 
-
 AppDataSource.initialize().then(() => {
     console.log("DataSource initialized");
     app.listen(port, () => {
@@ -13,5 +12,5 @@ AppDataSource.initialize().then(() => {
     })
 }).catch((e) => {
     console.log(e);
-})
+});
 

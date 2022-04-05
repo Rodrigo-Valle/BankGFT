@@ -8,12 +8,12 @@ export class GetCoOwnerController {
 
             const result = await getCoOwnerService.execute(req.id);
 
-            res.result = result
-            res.stat = 200
-            next()
+            res.result = result;
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400)
-            next(error)
+            res.status(400);
+            next(error);
         }
     }
 }

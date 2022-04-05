@@ -15,12 +15,12 @@ export class ChangePasswordUserController {
                 codigo: req.body.codigo
             });
 
-            res.result = "Senha alterada com sucesso"
-            res.stat = 200
-            next()
+            res.result = "Senha alterada com sucesso";
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400)
-            next(error)
+            res.status(400);
+            next(error);
         }
     }
 }

@@ -11,12 +11,12 @@ export class RecoveryUserController {
 
             await recoveryUserService.execute(req.body.email);
 
-            res.result = 'Solicitação enviada'
-            res.stat = 200
-            next()
+            res.result = 'Solicitação enviada';
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400)
-            next(error)
+            res.status(400);
+            next(error);
         }
     }
 }

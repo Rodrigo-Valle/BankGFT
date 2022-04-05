@@ -6,16 +6,16 @@ export class GetAccountController {
         try {
             const getAccountService = new GetAccountService();
 
-            const usuario = req.id
+            const usuario = req.id;
 
             const result = await getAccountService.execute(usuario);
 
-            res.result = result
-            res.stat = 200
-            next()
+            res.result = result;
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400)
-            next(error)
+            res.status(400);
+            next(error);
         }
     }
 }

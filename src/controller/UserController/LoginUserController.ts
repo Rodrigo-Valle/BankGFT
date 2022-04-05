@@ -16,12 +16,12 @@ export class LoginUserController {
 
             const token = await result.generateAuthToken();
 
-            res.result = { result, token }
-            res.stat = 200
-            next()
+            res.result = { result, token };
+            res.stat = 200;
+            next();
         } catch (error) {
-            res.status(400)
-            next(error)
+            res.status(400);
+            next(error);
         }
     }
 }

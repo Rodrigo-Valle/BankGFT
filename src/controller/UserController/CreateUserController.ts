@@ -17,12 +17,12 @@ export class CreateUserController {
 
             result.senha = req.body.senha;
 
-            res.result = result
-            res.stat = 201
-            next()
+            res.result = result;
+            res.stat = 201;
+            next();
         } catch (error) {
-            res.status(400)
-            next(error)
+            res.status(400);
+            next(error);
         }
     }
 }
