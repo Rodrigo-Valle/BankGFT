@@ -12,7 +12,11 @@ export class CreateUserController {
             const result = await createUserService.execute({
                 nome: req.body.nome,
                 email: req.body.email,
-                senha: req.body.senha
+                senha: req.body.senha,
+                descricao: req.body.descricao,
+                celular: req.body.celular,
+                username: req.body.username,
+                dataNasc: req.body.dataNasc
             });
 
             result.senha = req.body.senha;

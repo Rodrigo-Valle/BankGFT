@@ -2,11 +2,15 @@ import express, { Request, Response, Next, Error } from "express";
 import morgan from 'morgan';
 import * as bodyParser from "body-parser";
 import fs from 'fs';
-import path, { resolve } from 'path';
+import path from 'path';
 import { router } from "./Router/routes";
 
 const app = express();
 app.use(bodyParser.json());
+
+if(!fs.existsSync('src/logs')) {
+    fs.mkdirSync('src/logs');
+}
 
 app.use(morgan('dev', {
     skip: function (req: Request, res: Response) { return res.statusCode < 400 },

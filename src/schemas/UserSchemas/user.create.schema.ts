@@ -11,9 +11,25 @@ export const userCreateSchema = joi.object({
         'string.email': 'Informe um e-mail válido',
         'any.required': 'Campo email é obrigatório'
     }),
-    senha: joi.string().required().pattern(new RegExp(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8}$/)).messages({
+    senha: joi.string().required().pattern(new RegExp(/^[0-9]{8}$/)).messages({
         'any.required': "Campo senha é obrigatório",
-        'string.pattern.base': "A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero"
+        'string.pattern.base': "A senha deve possuir 8 numeros"
+    }),
+    username: joi.string().required().messages({
+        'any.required': 'Campo username é obrigatório'
+    }),
+    dataNasc: joi.date().raw().max('now').required().messages({
+        'any.required': 'Campo data de nascimento é obrigatório',
+        'date.base': 'O valor não corresponde a uma data valida',
+        'date.max': 'A data não pode ser posterior a data de hoje'
+    }),
+    celular: joi.string().length(9).required().pattern(new RegExp(/[0-9]/)).messages({
+        'any.required': 'Campo celular obrigatório',
+        'string.pattern.base': 'Celular é composto por 9 numeros',
+        'string.length': 'Celular é composto por 9 numeros'
+    }),
+    descricao: joi.string().required().messages({
+        'any.required': 'Campo descrição obrigatório'
     }),
     codigo_reset: joi.any().forbidden()
 });
