@@ -10,7 +10,7 @@ export class LoginUserController {
             const loginUserService = new LoginUserService();
 
             const result = await loginUserService.execute({
-                email: req.body.email,
+                username: req.body.username,
                 senha: req.body.senha
             });
 

@@ -15,10 +15,24 @@ export class User {
     @Column({
         unique: true
     })
+    userName: string
+
+    @Column()
+    celular: string
+
+    @Column('date')
+    data_nasc: Date
+
+    @Column({
+        unique: true
+    })
     email: string
 
     @Column()
     senha: string
+
+    @Column()
+    descricao: string
 
     @Column({
         nullable: true
