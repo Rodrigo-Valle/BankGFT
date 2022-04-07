@@ -32,15 +32,17 @@ router.post('/co-titular', auth, new CreateCoOwnerController().handle);
 router.get('/co-titular', auth, new GetCoOwnerController().handle);
 router.get('/co-titular/:id', auth, new GetOneCoOwnerController().handle);
 
-router.use((req: Request, res: Response, next: Next) => {
-    if (res.stat < 400) {
+router.use('*', (req: Request, res: Response, next: Next) => {
+    if (res.stat < 404 || res.stat !== undefined) {
         res.status(res.stat).json({
             hasError: false,
             error: null,
             data: res.result
         });
+
+    } else {
+        res.status(404).json('Not found');
     }
-    next();
 });
 
 router.use((error: Error, req: Request, res: Response, next: Next) => {
@@ -51,9 +53,6 @@ router.use((error: Error, req: Request, res: Response, next: Next) => {
     });
 });
 
-router.use((req, res, next) => {
-    res.status(404).json('Not found');
-});
 
 export { router }
 

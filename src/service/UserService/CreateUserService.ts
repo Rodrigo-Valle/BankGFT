@@ -14,6 +14,8 @@ interface IUsuario {
 
 export class CreateUserService {
     async execute({ nome, email, senha, celular, username, descricao, dataNasc }: IUsuario) {
+        const dataNascUtf = dataNasc + 'T00:00:00-03:00'
+
         const user = new User();
         user.nome = nome;
         user.email = email;
@@ -21,7 +23,7 @@ export class CreateUserService {
         user.celular = celular;
         user.descricao = descricao;
         user.userName = username;
-        user.data_nasc = new Date(dataNasc)
+        user.data_nasc = new Date(dataNascUtf)
 
         const usuarioRepository = AppDataSource.getRepository(User);
 
