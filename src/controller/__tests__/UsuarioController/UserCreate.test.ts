@@ -172,3 +172,128 @@ describe('UserCreateController validação campo senha', () => {
         expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 });
+
+describe('UserCreateController validação campo username/descricao', () => {
+    it('Deve retornar 400 se não informado campo username', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Campo username é obrigatório');
+    });
+
+    it('Deve retornar 400 se não informado campo descricao', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Campo descrição obrigatório');
+    });
+});
+
+describe('UserCreateController validação celular', () => {
+    
+    it('Deve retornar 400 se não informado campo celular', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            dataNasc: "01-01-2000"
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Campo celular obrigatório');
+    })    
+    it('Deve retornar 400 se for informado celular com menos de 9 numeros', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            celular: "11965478",
+            descricao: "teste",
+            dataNasc: "01-01-2000"
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Celular é composto por no minimo 9 numeros');
+    })    
+
+    it('Deve retornar 400 se for informado celular com mais de 15 numeros', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            celular: "11 965478981236486",
+            descricao: "teste",
+            dataNasc: "01-01-2000"
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Celular é composto por no maximo 15 numeros');
+    })    
+})
+
+describe("UserCreateController validação data de nacimento", () => {
+    it('Deve retornar 400 ao criar novo usuario sem o campo data de nascimento', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('Campo data de nascimento é obrigatório');
+    });
+
+    it('Deve retornar 400 ao criar novo usuario sem o campo data de nascimento', async () => {
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "dataqualuer"
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('O valor não corresponde a uma data valida');
+    });
+
+    it('Deve retornar 400 ao criar novo usuario com data de nascimento superior a data de hoje', async () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+
+        const response = await request(app).post('/usuario').send({
+            nome: "teste",
+            email: "email2@teste.com",
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: date
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body.error).toBe('A data não pode ser posterior a data de hoje');
+    });
+});

@@ -9,7 +9,11 @@ export const fakeUser = {
         const user = new User();
         user.nome = 'teste'
         user.email = 'email@teste.com'
-        user.senha = await bcrypt.hash('Abc12345', 8);
+        user.senha = await bcrypt.hash('12345678', 8);
+        user.userName = 'teste';
+        user.celular = '11999887766';
+        user.data_nasc = new Date('01-01-2000');
+        user.descricao = 'teste'
 
         await userRepository.save(user);
     },
@@ -19,7 +23,11 @@ export const fakeUser = {
         const user = new User();
         user.nome = 'teste'
         user.email = 'email@teste.com'
-        user.senha = await bcrypt.hash('Abc12345', 8);
+        user.senha = await bcrypt.hash('12345678', 8);
+        user.userName = 'teste';
+        user.celular = '11999887766';
+        user.data_nasc = new Date('01-01-2000');
+        user.descricao = 'teste'
 
         await userRepository.save(user);
 
@@ -35,7 +43,11 @@ export const fakeUser = {
         const user = new User();
         user.nome = 'teste'
         user.email = 'email@teste.com'
-        user.senha = await bcrypt.hash('Abc12345', 8);
+        user.senha = await bcrypt.hash('12345678', 8);
+        user.userName = 'teste';
+        user.celular = '11999887766';
+        user.data_nasc = new Date('01-01-2000');
+        user.descricao = 'teste'
         user.codigo_reset = codigo
 
         await userRepository.save(user);

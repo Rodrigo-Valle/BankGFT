@@ -4,8 +4,11 @@ import * as bodyParser from "body-parser";
 import fs from 'fs';
 import path from 'path';
 import { router } from "./Router/routes";
+import cors from 'cors'
 
 const app = express();
+
+app.use(cors());
 app.use(bodyParser.json());
 
 if(!fs.existsSync('src/logs')) {
