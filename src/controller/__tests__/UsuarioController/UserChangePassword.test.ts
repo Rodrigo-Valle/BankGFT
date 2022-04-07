@@ -25,7 +25,7 @@ describe('UserChangePasswordController Tests', () => {
     it('Deve retornar 200 ao solicitar troca da senha', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "email@teste.com",
-            senha: "abC12345",
+            senha: "32165498",
             codigo: codigo
         });
 
@@ -36,7 +36,7 @@ describe('UserChangePasswordController Tests', () => {
     it('Deve retornar 400 ao solicitar troca da senha com campo código inválido', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "email@teste.com",
-            senha: "abC12345",
+            senha: "87654321",
             codigo: "CodigoQualquer"
         });
 
@@ -47,7 +47,7 @@ describe('UserChangePasswordController Tests', () => {
     it('Deve retornar 400 ao solicitar troca da senha sem informar campo email', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "emailInexistente@test.com",
-            senha: "abC12345",
+            senha: "87654321",
             codigo: "CodigoQualquer"
         });
 
@@ -58,7 +58,7 @@ describe('UserChangePasswordController Tests', () => {
     it('Deve retornar 400 ao solicitar troca da senha sem campo código', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "emailInexistente@test.com",
-            senha: "abC12345",
+            senha: "87654321",
         });
 
         expect(response.status).toBe(400);
@@ -69,7 +69,7 @@ describe('UserChangePasswordController Tests', () => {
 describe('UserChangePasswordController validações campo email', () => {
     it('Deve retornar 400 ao solicitar troca da senha sem informar campo email', async () => {
         const response = await request(app).post('/usuario/change-password').send({
-            senha: "abC12345",
+            senha: "87654321",
             codigo: codigo
         });
 
@@ -80,7 +80,7 @@ describe('UserChangePasswordController validações campo email', () => {
     it('Deve retornar 400 ao solicitar troca da senha com valor inválido para o campo email', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "testeInvalidoemail.com",
-            senha: "abC12345",
+            senha: "87654321",
             codigo: codigo
         });
 
@@ -100,47 +100,36 @@ describe('UserChangePasswordController validações campo senha', () => {
         expect(response.body.error).toBe('Campo senha é obrigatório');
     });
 
-    it('Deve retornar 400 se for informado uma senha que possua apenas letras', async () => {
+    it('Deve retornar 400 se for informado uma senha que possua letras', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "teste@email.com",
             codigo: codigo,
-            senha: "abcdefgh"
+            senha: "ab123fgh"
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 
-    it('Deve retornar 400 se for informado uma senha que possua apenas numeros', async () => {
+    it('Deve retornar 400 se for informado uma senha que possua mais de 8 numeros', async () => {
         const response = await request(app).post('/usuario/change-password').send({
-            email: "teste@email.com",
+            email: 'email@teste.com',
             codigo: codigo,
-            senha: "12345678"
+            senha: "8765432198"
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 
-    it('Deve retornar 400 se for informado uma senha que possua mais de 8 caracteres', async () => {
+    it('Deve retornar 400 se for informado uma senha que possua menos de 8 numeros', async () => {
         const response = await request(app).post('/usuario/change-password').send({
             email: "teste@email.com",
             codigo: codigo,
-            senha: "Abc123456"
+            senha: "12345"
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
-    });
-
-    it('Deve retornar 400 se for informado uma senha que possua menos de 8 caracteres', async () => {
-        const response = await request(app).post('/usuario/change-password').send({
-            email: "teste@email.com",
-            codigo: codigo,
-            senha: "Abc1234"
-        });
-
-        expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 });
