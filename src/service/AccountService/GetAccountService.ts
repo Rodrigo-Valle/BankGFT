@@ -12,7 +12,11 @@ export class GetAccountService {
             select: {
                 id: true,
                 nome: true,
+                userName: true,
                 email: true,
+                celular: true,
+                data_nasc: true,
+                descricao: true
             },
             where: {
                 id: id
