@@ -4,7 +4,7 @@ import { StatusAccount } from "../../entity/enum/StatusAccountEnum";
 import { User } from "../../entity/User";
 
 interface IAccount {
-    saldo: number,
+    saldo?: number,
     cartaoCredito: string,
     usuario: number
 }
@@ -21,6 +21,7 @@ export class CreateAccountService {
         }
 
         const account = new Account();
+        account.saldo = saldo;
         account.cartao_credito = cartaoCredito;
         account.correntista = user;
 
