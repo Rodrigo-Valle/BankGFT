@@ -16,7 +16,8 @@ export class CreateCoOwnerController {
                 email: req.body.email,
                 dataNasc: req.body.dataNasc,
                 celular: req.body.celular,
-                descricao: req.body.descricao
+                descricao: req.body.descricao,
+                cpf: req.body.cpf
             });
 
             res.result = result;

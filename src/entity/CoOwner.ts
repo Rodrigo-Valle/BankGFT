@@ -11,6 +11,9 @@ export class CoOwner {
     nome: string
 
     @Column()
+    cpf: string
+
+    @Column()
     email: string
 
     @Column('date')
