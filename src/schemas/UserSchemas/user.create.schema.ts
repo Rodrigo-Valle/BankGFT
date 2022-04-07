@@ -23,10 +23,11 @@ export const userCreateSchema = joi.object({
         'date.base': 'O valor não corresponde a uma data valida',
         'date.max': 'A data não pode ser posterior a data de hoje'
     }),
-    celular: joi.string().length(9).required().pattern(new RegExp(/[0-9]/)).messages({
+    celular: joi.string().min(9).max(15).required().pattern(new RegExp(/[0-9]/)).messages({
         'any.required': 'Campo celular obrigatório',
         'string.pattern.base': 'Celular é composto por 9 numeros',
-        'string.length': 'Celular é composto por 9 numeros'
+        'string.min': 'Celular é composto por no minimo 9 numeros',
+        'string.max': 'Celular é composto por no maximo 15 numeros'
     }),
     descricao: joi.string().required().messages({
         'any.required': 'Campo descrição obrigatório'

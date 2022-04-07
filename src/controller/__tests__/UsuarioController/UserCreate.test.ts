@@ -21,8 +21,14 @@ describe('UserCreateController Tests', () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
             email: "email2@teste.com",
-            senha: "Abc12345"
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
+
+        console.log(response.body)
 
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty('data.id');
@@ -33,7 +39,11 @@ describe('UserCreateController validacão campo nome', () => {
     it('Deve retornar 400 se não for informado campo nome', async () => {
         const response = await request(app).post('/usuario').send({
             email: "email2@teste.com",
-            senha: "Abc12345"
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
@@ -44,7 +54,11 @@ describe('UserCreateController validacão campo nome', () => {
         const response = await request(app).post('/usuario').send({
             nome: 'Jo',
             email: "email2@teste.com",
-            senha: "Abc12345"
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
@@ -55,7 +69,11 @@ describe('UserCreateController validacão campo nome', () => {
         const response = await request(app).post('/usuario').send({
             nome: 'Lorem ipsum dolor sit amet consectetur adipiscing elit Donec sagittis felis sed sem auctor volutpat',
             email: "email2@teste.com",
-            senha: "Abc12345"
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
@@ -67,7 +85,11 @@ describe('UserCreateController validação campo email', () => {
     it('Deve retornar 400 se não for informado campo email', async () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
-            senha: "Abc12345"
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
@@ -77,8 +99,12 @@ describe('UserCreateController validação campo email', () => {
     it('Deve retornar 400 se não for informado campo email válido', async () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
-            email: "email qualquer",
-            senha: "Abc12345"
+            email: "emailqualquer",
+            senha: "12345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
@@ -91,53 +117,58 @@ describe('UserCreateController validação campo senha', () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
             email: "email2@teste.com",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
         expect(response.body.error).toBe('Campo senha é obrigatório');
     });
 
-    it('Deve retornar 400 se for informado uma senha que possua só letras', async () => {
+    it('Deve retornar 400 se for informado uma senha que possua letras', async () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
             email: "email2@teste.com",
-            senha: "abcdefgh"
+            senha: "as345678",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 
-    it('Deve retornar 400 se for informado uma senha que possua só numeros', async () => {
+    it('Deve retornar 400 se for informado uma senha que possua mais de 8 numeros', async () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
             email: "email2@teste.com",
-            senha: "12345678"
+            senha: "1234567890",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 
-    it('Deve retornar 400 se for informado uma senha que possua mais de 8 caracteres', async () => {
+    it('Deve retornar 400 se for informado uma senha que possua menos de 8 numeros', async () => {
         const response = await request(app).post('/usuario').send({
             nome: "teste",
             email: "email2@teste.com",
-            senha: "Abc123456"
+            senha: "123456",
+            username: "teste",
+            descricao: "teste",
+            celular: "11-98877-6655",
+            dataNasc: "01-01-2000"
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
-    });
-
-    it('Deve retornar 400 se for informado uma senha que possua menos de 8 caracteres', async () => {
-        const response = await request(app).post('/usuario').send({
-            nome: "teste",
-            email: "email2@teste.com",
-            senha: "Abc1234"
-        });
-
-        expect(response.status).toBe(400);
-        expect(response.body.error).toBe('A senha deve possuir 8 caracteres, e conter pelo menos uma letra miniuscula, uma maiuscula e um numero');
+        expect(response.body.error).toBe('A senha deve possuir 8 numeros');
     });
 });

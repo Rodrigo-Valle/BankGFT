@@ -1,3 +1,4 @@
+import { cp } from "fs";
 import { AppDataSource } from "../../data-source";
 import { CoOwner } from "../../entity/CoOwner";
 import { User } from "../../entity/User";
@@ -8,11 +9,12 @@ interface ICoOwner {
     dataNasc: string,
     celular: string,
     descricao: string,
-    id: number
+    id: number,
+    cpf: string
 }
 
 export class CreateCoOwnerService {
-    async execute({ nome, email, dataNasc, celular, descricao, id }: ICoOwner) {
+    async execute({ nome, email, dataNasc, celular, descricao, id, cpf }: ICoOwner) {
         const userRepository = AppDataSource.getRepository(User);
         const coOwnerRepository = AppDataSource.getRepository(CoOwner);
 
@@ -26,6 +28,7 @@ export class CreateCoOwnerService {
         coOwner.celular = celular;
         coOwner.descricao = descricao;
         coOwner.usuario = user;
+        coOwner.cpf = cpf;
 
         await coOwnerRepository.save(coOwner);
 
