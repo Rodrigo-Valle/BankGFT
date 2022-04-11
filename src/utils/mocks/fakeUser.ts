@@ -12,7 +12,7 @@ export const fakeUser = {
         user.senha = await bcrypt.hash('12345678', 8);
         user.userName = 'teste';
         user.celular = '11999887766';
-        user.data_nasc = new Date('01-01-2000');
+        user.data_nasc = new Date('2000-01-01');
         user.descricao = 'teste'
 
         await userRepository.save(user);
@@ -26,7 +26,7 @@ export const fakeUser = {
         user.senha = await bcrypt.hash('12345678', 8);
         user.userName = 'teste';
         user.celular = '11999887766';
-        user.data_nasc = new Date('01-01-2000');
+        user.data_nasc = new Date('2000-01-01');
         user.descricao = 'teste'
 
         await userRepository.save(user);
@@ -46,7 +46,7 @@ export const fakeUser = {
         user.senha = await bcrypt.hash('12345678', 8);
         user.userName = 'teste';
         user.celular = '11999887766';
-        user.data_nasc = new Date('01-01-2000');
+        user.data_nasc = new Date('2000-01-01');
         user.descricao = 'teste'
         user.codigo_reset = codigo
 

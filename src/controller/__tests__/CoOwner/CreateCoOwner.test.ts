@@ -31,9 +31,10 @@ describe("CreateCoOwnerController Tests", () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: "teste",
             email: "teste@email.com",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
         });
 
         expect(response.status).toBe(201);
@@ -43,9 +44,10 @@ describe("CreateCoOwnerController Tests", () => {
         const response = await request(app).post('/co-titular').set('Authorization', ``).send({
             nome: "teste",
             email: "teste@email.com",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
         })
 
         expect(response.status).toBe(401);
@@ -56,9 +58,11 @@ describe("CreateCoOwnerController validações nome", () => {
     it('Deve retornar 400 ao criar novo co-participante sem informar campo nome', async () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             email: "teste@email.com",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -69,9 +73,11 @@ describe("CreateCoOwnerController validações nome", () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: 'jo',
             email: "teste@email.com",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -82,9 +88,11 @@ describe("CreateCoOwnerController validações nome", () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: 'Lorem ipsum dolor sit amet consectetur adipiscing elit Donec sagittis felis sed sem auctor volutpat',
             email: "teste@email.com",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -96,9 +104,11 @@ describe("CreateCoOwnerController validações email", () => {
     it('Deve retornar 400 ao criar novo co-participante sem o campo email', async () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: "teste",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -109,9 +119,11 @@ describe("CreateCoOwnerController validações email", () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: "teste",
             email: "testeemailinvalido.com",
-            dataNasc: "02-19-1995",
+            dataNasc: "1995-02-19",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -125,7 +137,9 @@ describe("CreateCoOwnerController validações data de nacimento", () => {
             nome: "teste",
             email: "teste@email.com",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -138,7 +152,9 @@ describe("CreateCoOwnerController validações data de nacimento", () => {
             email: "teste@email.com",
             dataNasc: "99-99-9999",
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -154,7 +170,9 @@ describe("CreateCoOwnerController validações data de nacimento", () => {
             email: "teste@email.com",
             dataNasc: date,
             celular: "999887766",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
@@ -167,51 +185,43 @@ describe("CreateCoOwnerController validações campo celular", () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: "teste",
             email: "teste@email.com",
-            dataNasc: '02-19-1995',
-            descricao: "teste coowner"
+            dataNasc: '1995-01-04',
+            descricao: "teste coowner",
+            cpf: "12345678901"
         });
 
         expect(response.status).toBe(400);
         expect(response.body.error).toBe('Campo celular obrigatório');
     });
 
-    it('Deve retornar 400 ao criar novo co-participante com valor superior a 9 numeros para o campo celular', async () => {
+    it('Deve retornar 400 ao criar novo co-participante com valor superior a 15 numeros para o campo celular', async () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: "teste",
             email: "teste@email.com",
-            dataNasc: '02-19-1995',
-            celular: "9998877669",
-            descricao: "teste coowner"
+            dataNasc: '1995-02-19',
+            celular: "99988776691234567",
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('Celular é composto por 9 numeros');
+        expect(response.body.error).toBe('Celular é composto por no maximo 15 numeros');
     });
 
     it('Deve retornar 400 ao criar novo co-participante com valor inferior a 9 numeros para o campo celular', async () => {
         const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
             nome: "teste",
             email: "teste@email.com",
-            dataNasc: '02-19-1995',
+            dataNasc: '1995-02-19',
             celular: "99988779",
-            descricao: "teste coowner"
+            descricao: "teste coowner",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe('Celular é composto por 9 numeros');
-    });
-
-    it('Deve retornar 400 ao criar novo co-participante com valor inválido para o campo celular', async () => {
-        const response = await request(app).post('/co-titular').set('Authorization', `Bearer ${token}`).send({
-            nome: "teste",
-            email: "teste@email.com",
-            dataNasc: '02-19-1995',
-            celular: "989av98542v",
-            descricao: "teste coowner"
-        });
-
-        expect(response.status).toBe(400);
-        expect(response.body.error).toBe('Celular é composto por 9 numeros');
+        expect(response.body.error).toBe('Celular é composto por no minimo 9 numeros');
     });
 });
 
@@ -222,6 +232,8 @@ describe("CreateCoOwnerController validações campo descricao", () => {
             email: "teste@email.com",
             dataNasc: '02-19-1995',
             celular: "999887769",
+            cpf: "12345678901"
+
         });
 
         expect(response.status).toBe(400);

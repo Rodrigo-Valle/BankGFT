@@ -21,7 +21,7 @@ export const coOwnerCreateSchema = joi.object({
         'any.required': 'Campo celular obrigatório',
         'string.pattern.base': 'Celular é composto por 9 numeros',
         'string.min': 'Celular é composto por no minimo 9 numeros',
-        'string.max': 'Celular é composto por no minimo 9 numeros'
+        'string.max': 'Celular é composto por no maximo 15 numeros'
     }),
     descricao: joi.string().required().messages({
         'any.required': 'Campo descrição obrigatório'

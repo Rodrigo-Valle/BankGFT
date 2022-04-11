@@ -10,8 +10,9 @@ export const fakeCoOwner = {
         coOwner.nome = 'coowner'
         coOwner.email = 'coowner@email.com'
         coOwner.celular = '987654321'
-        coOwner.data_nasc = new Date('03-15-1991')
+        coOwner.data_nasc = new Date('1991-03-15')
         coOwner.descricao = 'coowner'
+        coOwner.cpf = "12345678901"
         coOwner.usuario = user;
 
         await coOwnerRepository.save(coOwner);

@@ -22,7 +22,6 @@ export class GetCoOwnerService {
         if (user === null) {
             throw new Error("Co-titular não localizado");
         }
-        console.log(user);
         return user;
     }
 }

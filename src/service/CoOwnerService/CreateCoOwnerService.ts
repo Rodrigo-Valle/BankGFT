@@ -22,8 +22,6 @@ export class CreateCoOwnerService {
 
         const coOwner = new CoOwner();
 
-        console.log(dataNasc)
-
         const dataNascUtf = dataNasc + 'T00:00:00-03:00'
         coOwner.nome = nome;
         coOwner.email = email;
@@ -33,7 +31,6 @@ export class CreateCoOwnerService {
         coOwner.usuario = user;
         coOwner.cpf = cpf;
 
-        console.log(coOwner.data_nasc)
         await coOwnerRepository.save(coOwner);
 
         return coOwner.getCoOwner();

@@ -25,10 +25,8 @@ describe('UserCreateController Tests', () => {
             username: "teste",
             descricao: "teste",
             celular: "11-98877-6655",
-            dataNasc: "01-01-2000"
+            dataNasc: "1995-01-04"
         });
-
-        console.log(response.body)
 
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty('data.id');
